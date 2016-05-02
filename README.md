@@ -134,8 +134,7 @@ Look at the edges, Adj[u], then key thing is to check for duplicates, `for v not
 To visit all the nodes reachable from s (initial node), in linear time.
 
 
-4. What's about the `parent`?
+4. As the side effects of BFS, the following is what you get for free:
 
-
-
-
+- shortest path. `parent`.
+- # of moves from A to B. `level`.
