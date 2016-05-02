@@ -123,18 +123,17 @@ BFS(s, Adj):
 ```
 1. **next**. How do we compute `next`?
 
-We look at every node in the frontier, and we look all the nodes you can reach from those nodes, u.
+  We look at every node in the frontier, and we look all the nodes you can reach from those nodes, u.
 
 2. How do we check for duplicates (visited nodes)?
 
-Look at the edges, Adj[u], then key thing is to check for duplicates, `for v not in level`. (have we seen the nodes before?)
+  Look at the edges, Adj[u], then key thing is to check for duplicates, `for v not in level`. (have we seen the nodes before?)
 
 3. The gist of the algorithm?
 
-To visit all the nodes reachable from s (initial node), in linear time.
-
+  To visit all the nodes reachable from s (initial node), in linear time.
 
 4. As the side effects of BFS, the following is what you get for free:
 
-- shortest path. `parent`.
-- # of moves from A to B. `level`.
+  - # of moves with *level[u]*. From initial node S to to u ∈ V.
+  - shortest path with *Π parent(u)*. From initial node S to u ∈ V.
