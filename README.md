@@ -58,6 +58,12 @@ At least for graph exploration proble, this is the representation you want. Beca
 want to know can I go next?
 
 
+What about it's Space complexity?
+`O( V + E )` for undirected graph,
+`O( V + 2E )` for directed graph, but its essentially just `O( V + E )`.
+
+Ideally, your algorithm will run in that much of time, as those are the noes you need to lookup. `O (V + E )`
+
 ### 3. Object-Oriented(Adjacency Representation)
 
 > V.neighbors = Adj[v]
@@ -84,5 +90,52 @@ Don't have to build the whole graph, just build enough of it until you find your
 
 For n * n * n cube, in O(n) time, you can list all the O(n) next states, you can list O(n) neighbors, so you can keep
 **exploring**, searching for your state.
+
+
+
+
+---
+
+### Breadth first search
+- visit all nodes(vertices) reachable from given s ∈ V
+- O(V+E) time.
+- look at nodes reachable in O moves, 1 move, 2 moves, ..., until run out of graph.
+- careful to avoid duplicates. (it would spend infinite times...)
+
+
+#### Pseudo-code
+```python
+BFS(s, Adj):
+	level = {s: 0}      // hash table.
+	parent = {s: None}  // hash table.
+	i = 1
+	frontier = [s]      // append to array: frontier
+	while frontier:
+		next = []
+		for u in frontier:
+			for v in Adj[u]:
+				if v not in level:
+					level[v] = i
+					parent[v] = u
+					next.append(v)
+		frontier = next
+		i +=1
+```
+1. **next**. How do we compute `next`?
+
+We look at every node in the frontier, and we look all the nodes you can reach from those nodes, u.
+
+2. How do we check for duplicates (visited nodes)?
+
+Look at the edges, Adj[u], then key thing is to check for duplicates, `for v not in level`. (have we seen the nodes before?)
+
+3. The gist of the algorithm?
+
+To visit all the nodes reachable from s (initial node), in linear time.
+
+
+4. What's about the `parent`?
+
+
 
 
