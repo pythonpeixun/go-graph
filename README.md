@@ -137,3 +137,70 @@ BFS(s, Adj):
 
   - # of moves with *level[u]*. From initial node S to to u ∈ V.
   - shortest path with *Π parent(u)*. From initial node S to u ∈ V.
+
+
+
+### Depth first search
+- recursively explore graph, backtracking as necessary. (kinda like solving a maze)
+- careful not to repeat
+
+
+#### Pseudocode
+
+```python
+parent = {s: None}
+DFS-Visit(Adj, S):
+	for v not in parent:
+		parent[v] = s
+	DFS-Visit(Adj, v)
+
+```
+
+1. The gist?
+
+Only visiting vertices reachable from S.
+
+```python
+	parent = {}
+	for s in V:
+		if s not in parent:
+		parent[s] = None
+		DFS-Visit(Adj, s)
+```
+
+1. The gist?
+
+this is the top level algorithm. The idea was, we don't really know how to start our search.
+If its a disconnected graph or not a strongly connected graph, we might have to start our search
+multiple time. The DFS algorithm is finding all the possible places you might start the search,
+and try them all.
+
+
+
+2. The Search Characteristics?
+It goes as deep as it can, before backtracking.
+
+
+
+---
+
+
+### Cycle Detection
+
+> G has a cycle ⇔ DFS has a back edge
+
+#### Proof: (<-)
+
+> I have a back edge, I want to claim that there's a cycle.
+
+Just draw a back edge that connects 2 vertices, u and v, and mark one of them as ancestor, the other as
+descendant, finally draw a tree-edge path from ancestor to descendant. You will see a cycle on the drawn
+diagram.
+
+Hennce, if there is a back edge, by defintion, it makes a cycle.
+
+#### Proof: (->)
+
+
+
+
