@@ -1,9 +1,11 @@
 package main
 
+import "fmt"
+
 // bfs explores graph(adj) based on initial node. In the process,
 // shortest-path reachable from vertex S will be collected: parent, and
 // number of moves reachable from vertex S will be collected: level as well.
-func bfs(s string, adj map[string][]string) {
+func bfs(s string, adj map[string][]string) map[string]string {
 
 	frontier := []string{s}
 	level := make(map[string]int) // visited
@@ -24,6 +26,33 @@ func bfs(s string, adj map[string][]string) {
 			}
 			frontier = next
 		}
+
+	}
+	return parent
+
+}
+
+func shortestPathTo(dest string, parent map[string]string) {
+
+	var stack []string
+	stack = append(stack, dest)
+
+	for {
+		if _, ok := parent[dest]; !ok {
+			break
+		}
+		stack = append(stack, parent[dest])
+		dest = parent[dest]
+	}
+
+	for {
+		var n string
+		n, stack = pop(stack)
+		if len(stack) == 0 {
+			fmt.Println(n)
+			break
+		}
+		fmt.Print(n + "->")
 
 	}
 

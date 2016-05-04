@@ -17,7 +17,12 @@ func TestBfs(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		bfs(test.start, test.adj)
+		parent := bfs(test.start, test.adj)
+
+		shortestPathTo("x", parent)
+		shortestPathTo("d", parent)
+		shortestPathTo("c", parent)
+
 	}
 }
 
