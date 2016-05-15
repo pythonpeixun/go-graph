@@ -94,39 +94,52 @@ type Graph interface {
 	// AddEdge creates vertex u, v if not exist,
 	// then form an edge via adjacency-list.
 	//
-	// return false if edge has been added.
+	// return false if edge has previously been added.
 	AddEdge(u, v Vertex, weight float64) bool
 }
 
 // Programming wise, its much more efficient to represent Graph
 // with adjacency-list.
 type graph struct {
-	vtx map[ID]Vertex
-	adj map[ID]map[ID]float64
+	vertices map[ID]Vertex
+	adj      map[ID]map[ID]float64
 }
 
 // NewGraph returns graph instance.
 func NewGraph() Graph {
 	return &graph{
-		vtx: make(map[ID]Vertex),
-		adj: make(map[ID]map[ID]float64),
+		vertices: make(map[ID]Vertex),
+		adj:      make(map[ID]map[ID]float64),
 	}
 }
 
 func (g *graph) AddVertex(v Vertex) bool {
-	if _, ok := g.vtx[v.ID()]; ok {
+	if _, ok := g.vertices[v.ID()]; ok {
 		return false
 	}
 
-	g.vtx[v.ID()] = v
+	g.vertices[v.ID()] = v
 	return true
 }
 
 func (g *graph) AddEdge(u, v Vertex, weight float64) bool {
 
-	//if g.vtx[u]
+	g.AddVertex(u)
+	g.AddVertex(v)
 
-	return false
+	edges := g.adj[u]
+
+	if edges == nil {
+		edges = make(map[ID]float64)
+		g.adj[u] = edges
+	}
+
+	if _, found := edges[v]; found {
+		return false
+	}
+
+	edges[v] = weight
+	return true
 }
 
 func main() {
